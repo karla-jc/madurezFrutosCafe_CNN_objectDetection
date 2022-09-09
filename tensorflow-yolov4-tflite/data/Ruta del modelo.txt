@@ -1,0 +1,3 @@
+Descargue y coloque el modelo yolov4_custom.weights en esta carpeta.
+Ruta:
+https://drive.google.com/file/d/1sBiM1b9kGAxMzo05BqVg_tnWJwKRHV79/view?usp=sharing
