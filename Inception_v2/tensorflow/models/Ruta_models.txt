@@ -1,0 +1,2 @@
+Descargar el directorio y copiar el contenido en la carpeta models.
+Ruta: https://drive.google.com/drive/folders/1EUrpJsE1vK2x89J7YXyN29fbGyV5J87z?usp=sharing
