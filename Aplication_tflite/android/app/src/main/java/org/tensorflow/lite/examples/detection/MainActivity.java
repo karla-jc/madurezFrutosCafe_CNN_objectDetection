@@ -226,8 +226,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"No se ha dectado frutos", Toast.LENGTH_SHORT).show();
             }
         }
-//        tracker.trackResults(mappedRecognitions, new Random().nextInt());
-//        trackingOverlay.postInvalidate();
+
         imageView.setImageBitmap(bitmap);
     }
 
@@ -285,7 +284,6 @@ public class MainActivity extends AppCompatActivity {
                 LOGGER.e(e, "Nada :c");
             }
 
-            //this.sourceBitmap = Utils.getBitmapFromAsset(MainActivity.this, imageUri);
 
 
         }else if(resultCode == RESULT_OK && requestCode == TOMAR_FOTO){
