@@ -7,14 +7,13 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
     <Button
         android:id="@+id/cameraButton"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="7dp"
         android:layout_marginEnd="25dp"
-        android:backgroundTint="#FF6F00"
+        android:backgroundTint="#3F7EE9"
         android:drawableLeft="@android:drawable/ic_media_play"
         android:text="Tiempo Real"
         app:layout_constraintBottom_toBottomOf="@+id/detectButton"
@@ -31,7 +30,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginEnd="7dp"
         android:layout_marginBottom="126dp"
-        android:backgroundTint="#FF6F00"
+        android:backgroundTint="#3F7EE9"
         android:drawableLeft="@android:drawable/ic_menu_edit"
         android:text="Detectar"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,7 +47,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/design_default_color_primary" />
+        android:background="@color/tfe_color_primary" />
 
 
     <Button
@@ -59,7 +58,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="7dp"
         android:layout_marginBottom="60dp"
-        android:backgroundTint="#FF6F00"
+        android:backgroundTint="#3F7EE9"
         android:drawableLeft="@android:drawable/ic_menu_camera"
         android:text="Capturar Foto"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -76,7 +75,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="60dp"
-        android:backgroundTint="#FF6F00"
+        android:backgroundTint="#3F7EE9"
         android:drawableLeft="@android:drawable/ic_menu_gallery"
         android:text="Galeria"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -85,6 +84,19 @@
         app:layout_constraintStart_toEndOf="@+id/btnTomarFoto"
         app:layout_constraintTop_toBottomOf="@+id/cameraButton"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/ima"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:foreground="@drawable/logo_cop"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.948"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.995" />
 
     <org.tensorflow.lite.examples.detection.customview.OverlayView
         android:id="@+id/tracking_overlay"

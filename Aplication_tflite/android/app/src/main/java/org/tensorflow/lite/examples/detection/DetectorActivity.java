@@ -46,8 +46,8 @@ import org.tensorflow.lite.examples.detection.tflite.YoloV4Classifier;
 import org.tensorflow.lite.examples.detection.tracking.MultiBoxTracker;
 
 /**
- * An activity that uses a TensorFlowMultiBoxDetector and ObjectTracker to detect and then track
- * objects.
+ * Esta actividad usa TensorFlowMultiBoxDetector y ObjectTracker para detectar y
+ * luego rastrear objetos.
  */
 public class DetectorActivity extends CameraActivity implements OnImageAvailableListener {
     private static final Logger LOGGER = new Logger();
@@ -59,7 +59,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/coco.txt";
 
     private static final DetectorMode MODE = DetectorMode.TF_OD_API;
-    private static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.5f;
+    private static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.95f;
     private static final boolean MAINTAIN_ASPECT = false;
     private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
     private static final boolean SAVE_PREVIEW_BITMAP = false;
@@ -87,9 +87,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     @Override
     public void onPreviewSizeChosen(final Size size, final int rotation) {
-        final float textSizePx =
-                TypedValue.applyDimension(
-                        TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
+        final float textSizePx = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE_DIP, getResources().getDisplayMetrics());
         borderedText = new BorderedText(textSizePx);
         borderedText.setTypeface(Typeface.MONOSPACE);
 
@@ -98,25 +97,23 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         int cropSize = TF_OD_API_INPUT_SIZE;
 
         try {
-            detector =
-                    YoloV4Classifier.create(
-                            getAssets(),
-                            TF_OD_API_MODEL_FILE,
-                            TF_OD_API_LABELS_FILE,
-                            TF_OD_API_IS_QUANTIZED);
-//            detector = TFLiteObjectDetectionAPIModel.create(
-//                    getAssets(),
-//                    TF_OD_API_MODEL_FILE,
-//                    TF_OD_API_LABELS_FILE,
-//                    TF_OD_API_INPUT_SIZE,
-//                    TF_OD_API_IS_QUANTIZED);
+            detector = YoloV4Classifier.create(
+                    getAssets(),
+                    TF_OD_API_MODEL_FILE,
+                    TF_OD_API_LABELS_FILE,
+                    TF_OD_API_IS_QUANTIZED);
+            // detector = TFLiteObjectDetectionAPIModel.create(
+            // getAssets(),
+            // TF_OD_API_MODEL_FILE,
+            // TF_OD_API_LABELS_FILE,
+            // TF_OD_API_INPUT_SIZE,
+            // TF_OD_API_IS_QUANTIZED);
             cropSize = TF_OD_API_INPUT_SIZE;
         } catch (final IOException e) {
             e.printStackTrace();
             LOGGER.e(e, "Exception initializing classifier!");
-            Toast toast =
-                    Toast.makeText(
-                            getApplicationContext(), "Classifier could not be initialized", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(
+                    getApplicationContext(), "Classifier could not be initialized", Toast.LENGTH_SHORT);
             toast.show();
             finish();
         }
@@ -131,11 +128,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         rgbFrameBitmap = Bitmap.createBitmap(previewWidth, previewHeight, Config.ARGB_8888);
         croppedBitmap = Bitmap.createBitmap(cropSize, cropSize, Config.ARGB_8888);
 
-        frameToCropTransform =
-                ImageUtils.getTransformationMatrix(
-                        previewWidth, previewHeight,
-                        cropSize, cropSize,
-                        sensorOrientation, MAINTAIN_ASPECT);
+        frameToCropTransform = ImageUtils.getTransformationMatrix(
+                previewWidth, previewHeight,
+                cropSize, cropSize,
+                sensorOrientation, MAINTAIN_ASPECT);
 
         cropToFrameTransform = new Matrix();
         frameToCropTransform.invert(cropToFrameTransform);
@@ -205,8 +201,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                 break;
                         }
 
-                        final List<Classifier.Recognition> mappedRecognitions =
-                                new LinkedList<Classifier.Recognition>();
+                        final List<Classifier.Recognition> mappedRecognitions = new LinkedList<Classifier.Recognition>();
 
                         for (final Classifier.Recognition result : results) {
                             final RectF location = result.getLocation();
@@ -248,7 +243,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         return DESIRED_PREVIEW_SIZE;
     }
 
-    // Which detection model to use: by default uses Tensorflow Object Detection API frozen
+    // Qué modelo de detección utilizar: por defecto utiliza Tensorflow Object
+    // Detection API congelada.
     // checkpoints.
     private enum DetectorMode {
         TF_OD_API;

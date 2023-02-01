@@ -39,27 +39,31 @@ public interface Classifier {
     abstract float getObjThresh();
 
     /**
-     * An immutable result returned by a Classifier describing what was recognized.
+     * Resultado inmutable devuelto por un clasificador que describe lo que se ha
+     * reconocido.
      */
     public class Recognition {
         /**
-         * A unique identifier for what has been recognized. Specific to the class, not the instance of
-         * the object.
+         * Un identificador único para lo que ha sido reconocido. Específico de la
+         * clase, no de la instancia de
+         * el objeto.
          */
         private final String id;
 
         /**
-         * Display name for the recognition.
+         * Nombre para mostrar el reconocimiento.
          */
         private final String title;
 
         /**
-         * A sortable score for how good the recognition is relative to others. Higher should be better.
+         * Una puntuación ordenable que indica lo bueno que es el reconocimiento en
+         * comparación con otros. Cuanto más alto, mejor.
          */
         private final Float confidence;
 
         /**
-         * Optional location within the source image for the location of the recognized object.
+         * Ubicación opcional dentro de la imagen de origen para la localización del
+         * objeto reconocido.
          */
         private RectF location;
 
@@ -73,7 +77,8 @@ public interface Classifier {
             this.location = location;
         }
 
-        public Recognition(final String id, final String title, final Float confidence, final RectF location, int detectedClass) {
+        public Recognition(final String id, final String title, final Float confidence, final RectF location,
+                int detectedClass) {
             this.id = id;
             this.title = title;
             this.confidence = confidence;

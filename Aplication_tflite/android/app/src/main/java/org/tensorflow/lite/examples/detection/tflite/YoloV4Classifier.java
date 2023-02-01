@@ -49,19 +49,6 @@ import org.tensorflow.lite.Interpreter;
 import org.tensorflow.lite.gpu.GpuDelegate;
 import org.tensorflow.lite.nnapi.NnApiDelegate;
 
-/**
- * Wrapper for frozen detection models trained using the Tensorflow Object
- * Detection API:
- * - https://github.com/tensorflow/models/tree/master/research/object_detection
- * where you can find the training code.
- * <p>
- * To use pretrained models in the API or convert to TF Lite models, please see
- * docs for details:
- * -
- * https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md
- * -
- * https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md#running-our-model-on-android
- */
 public class YoloV4Classifier implements Classifier {
 
     /**
@@ -161,12 +148,12 @@ public class YoloV4Classifier implements Classifier {
 
     private static final Logger LOGGER = new Logger();
 
-    // Float model
+    // Modelo flotante
     private static final float IMAGE_MEAN = 0;
 
     private static final float IMAGE_STD = 255.0f;
 
-    // config yolov4
+    // Configuración Yolov4
     private static final int INPUT_SIZE = 416;
     private static final int[] OUTPUT_WIDTH = new int[] { 52, 26, 13 };
 
@@ -178,12 +165,12 @@ public class YoloV4Classifier implements Classifier {
 
     private static final int NUM_BOXES_PER_BLOCK = 3;
 
-    // Number of threads in the java app
+    // Número de hilos en la aplicación java
     private static final int NUM_THREADS = 4;
     private static boolean isNNAPI = false;
     private static boolean isGPU = true;
 
-    // tiny or not
+    // Es o no YoloTiny
     private static boolean isTiny = false;
 
     // config yolov4 tiny
@@ -196,9 +183,9 @@ public class YoloV4Classifier implements Classifier {
 
     private boolean isModelQuantized;
 
-    // Config values.
+    // Configuración de valores
 
-    // Pre-allocated buffers.
+    // Búferes preasignados
     private Vector<String> labels = new Vector<String>();
     private int[] intValues;
 
@@ -209,18 +196,19 @@ public class YoloV4Classifier implements Classifier {
     private YoloV4Classifier() {
     }
 
-    // non maximum suppression
+    // supresión no máxima
     protected ArrayList<Recognition> nms(ArrayList<Recognition> list) {
         ArrayList<Recognition> nmsList = new ArrayList<Recognition>();
 
         for (int k = 0; k < labels.size(); k++) {
-            // 1.find max confidence per class
+            // 1.encontrar la confianza máxima por clase
             PriorityQueue<Recognition> pq = new PriorityQueue<Recognition>(
                     50,
                     new Comparator<Recognition>() {
                         @Override
                         public int compare(final Recognition lhs, final Recognition rhs) {
-                            // Intentionally reversed to put high confidence at the head of the queue.
+                            // Invertido intencionadamente para poner la alta confianza a la cabeza de la
+                            // cola.
                             return Float.compare(rhs.getConfidence(), lhs.getConfidence());
                         }
                     });
@@ -231,9 +219,9 @@ public class YoloV4Classifier implements Classifier {
                 }
             }
 
-            // 2.do non maximum suppression
+            // 2.hacer supresión no máxima
             while (pq.size() > 0) {
-                // insert detection with max confidence
+                // detección de inserciones con la máxima confianza
                 Recognition[] a = new Recognition[pq.size()];
                 Recognition[] detections = pq.toArray(a);
                 Recognition max = detections[0];
@@ -289,7 +277,7 @@ public class YoloV4Classifier implements Classifier {
     protected static final int PIXEL_SIZE = 3;
 
     /**
-     * Writes Image data into a {@code ByteBuffer}.
+     * Escribe datos de imagen en un {@code ByteBuffer}.
      */
     protected ByteBuffer convertBitmapToByteBuffer(Bitmap bitmap) {
         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * BATCH_SIZE * INPUT_SIZE * INPUT_SIZE * PIXEL_SIZE);
@@ -442,7 +430,7 @@ public class YoloV4Classifier implements Classifier {
         pred_coor[1] = 1.0f * (pred_coor[1] - dh) / resize_ratio;
         pred_coor[3] = 1.0f * (pred_coor[3] - dh) / resize_ratio;
 
-        // (3) clip some boxes those are out of range
+        // (3) clip de algunas cajas que están fuera de rango
         pred_coor[0] = pred_coor[0] > 0 ? pred_coor[0] : 0;
         pred_coor[1] = pred_coor[1] > 0 ? pred_coor[1] : 0;
 
@@ -456,7 +444,7 @@ public class YoloV4Classifier implements Classifier {
             pred_coor[3] = 0;
         }
 
-        // (4) discard some invalid boxes
+        // (4) descartar algunas casillas no válidas
         float temp1 = pred_coor[2] - pred_coor[0];
         float temp2 = pred_coor[3] - pred_coor[1];
         float temp = temp1 * temp2;
