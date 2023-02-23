@@ -1,5 +1,6 @@
 # Determinación de madurez de frutos del café haciendo uso de redes neuronales convolucionales para detección de objetos
-# PROTOTIPO DE APLICACIÓN MÓVIL PARA LA DETECCIÓN DE NIVELES DE MADUREZ EN FRUTOS DE CAFÉ "COFFEE DETECTOR"
+------------
+## PROTOTIPO DE APLICACIÓN MÓVIL PARA LA DETECCIÓN DE NIVELES DE MADUREZ EN FRUTOS DE CAFÉ "COFFEE DETECTOR"
 ![icono_app](https://user-images.githubusercontent.com/58428369/220795561-6fcee84a-5e82-44fe-a67a-9e536f0174e1.png)
 
 ------------
